@@ -1,50 +1,50 @@
 # TriviaQuizMulti
 
-Applicazione client-server per quiz multiplayer sviluppata in C per il corso di Reti Informatiche - Università di Pisa.
+Multiplayer client-server quiz application developed in C for the Computer Networks course - University of Pisa.
 
-## Descrizione
+## Description
 
-TriviaQuizMulti è un sistema di quiz interattivo che permette a più giocatori di connettersi simultaneamente a un server e rispondere a domande su tre tematiche diverse:
+TriviaQuizMulti is an interactive quiz system that allows multiple players to connect simultaneously to a server and answer questions on three different topics:
 
-- **Capitali del mondo e geografia**
-- **Calciatori e squadre**
-- **Videogiochi classici**
+- **World Capitals and Geography**
+- **Football Players and Teams**
+- **Classic Video Games**
 
-Il sistema supporta fino a 10 giocatori contemporaneamente e mantiene classifiche separate per ogni tema.
+The system supports up to 10 simultaneous players and maintains separate leaderboards for each topic.
 
-## Architettura
+## Architecture
 
-- **Protocollo**: TCP/IP con socket stream
-- **Modello**: Client-Server con multiplexing I/O (select)
-- **Porta predefinita**: 1234
-- **Comunicazione**: Protocollo custom basato su TAG + lunghezza + payload
+- **Protocol**: TCP/IP with stream sockets
+- **Model**: Client-Server with I/O multiplexing (select)
+- **Default Port**: 1234
+- **Communication**: Custom protocol based on TAG + length + payload
 
-### Struttura Messaggi
+### Message Structure
 
-Ogni messaggio segue il formato:
+Each message follows this format:
 
-1. **TAG** (16 byte fissi) - identifica il tipo di messaggio
-2. **Lunghezza** (4 byte in network byte order)
-3. **Payload** (contenuto effettivo)
+1. **TAG** (16 fixed bytes) - identifies the message type
+2. **Length** (4 bytes in network byte order)
+3. **Payload** (actual content)
 
-## Funzionalità
+## Features
 
 ### Server
 
-- Gestione di massimo 10 client simultanei con select()
-- Caricamento domande/risposte da file di testo
-- Gestione stato di gioco per ogni giocatore
-- Calcolo punteggi e classifiche in tempo reale
-- Graceful shutdown con gestione segnali (SIGINT, SIGHUP)
+- Management of up to 10 concurrent clients using `select()`
+- Loading questions/answers from text files
+- Game state management for each player
+- Real-time score calculation and leaderboards
+- Graceful shutdown with signal handling (SIGINT, SIGHUP)
 
 ### Client
 
-- Menu interattivo per scelta quiz
-- Validazione input utente
-- Visualizzazione classifiche in tempo reale (comando `show score`)
-- Disconnessione controllata (comando `endquiz`)
+- Interactive menu for quiz selection
+- User input validation
+- Real-time leaderboard viewing (command `show score`)
+- Controlled disconnection (command `endquiz`)
 
-## Compilazione
+## Compilation
 
 ```bash
 # Server
@@ -54,69 +54,69 @@ gcc -o server TriviaQuizMulti/server_pellegrini.c
 gcc -o client TriviaQuizMulti/client_pellegrini.c
 ```
 
-## Utilizzo
+## Usage
 
-### Avvio Server
+### Starting the Server
 
 ```bash
 ./server
 ```
 
-Il server si mette in ascolto sulla porta 1234 e carica le domande dai file `questions.txt` e `answers.txt`.
+The server listens on port 1234 and loads questions from `questions.txt` and `answers.txt`.
 
-### Avvio Client
+### Starting the Client
 
 ```bash
-./client [porta]
+./client [port]
 ```
 
-Se non specificata, la porta predefinita è 1234.
+If not specified, the default port is 1234.
 
-## File di Configurazione
+## Configuration Files
 
-- **questions.txt**: contiene le 15 domande (5 per tema)
-- **answers.txt**: contiene le risposte corrispondenti
+- **questions.txt**: contains the 15 questions (5 per topic)
+- **answers.txt**: contains the corresponding answers
 
-## Comandi Speciali
+## Special Commands
 
-Durante il gioco il client può utilizzare:
+During the game, the client can use:
 
-- `show score` - visualizza la classifica corrente
-- `endquiz` - termina la sessione
+- `show score` - view the current leaderboard
+- `endquiz` - end the session
 
-## Struttura del Progetto
+## Project Structure
 
 ```
 TriviaQuizMulti/
 ├── README.md
 ├── documentazione.pdf
 └── TriviaQuizMulti/
-    ├── server_pellegrini.c    # Codice sorgente server
-    ├── client_pellegrini.c    # Codice sorgente client
-    ├── utils.h                # Header con funzioni di comunicazione
-    ├── questions.txt          # Database domande
-    └── answers.txt            # Database risposte
+    ├── server_pellegrini.c    # Server source code
+    ├── client_pellegrini.c    # Client source code
+    ├── utils.h                # Header with communication functions
+    ├── questions.txt          # Questions database
+    └── answers.txt            # Answers database
 ```
 
-## Protocollo di Comunicazione
+## Communication Protocol
 
-I TAG utilizzati per identificare i messaggi:
+TAGs used to identify messages:
 
-- `MENU` - fase menu di gioco
-- `NICKNAME` - fase scelta nickname
-- `QUESTION` - domanda del quiz
-- `ANSWER` - risposta al quiz
-- `ESIT` - esito della risposta
-- `SCORE` - visualizzazione classifica
-- `QUIT` - uscita dal gioco
-- `FINALSCORE` - classifica finale (tutti i quiz completati)
+- `MENU` - game menu phase
+- `NICKNAME` - nickname selection phase
+- `QUESTION` - quiz question
+- `ANSWER` - quiz answer
+- `ESIT` - answer result
+- `SCORE` - leaderboard display
+- `QUIT` - exit game
+- `FINALSCORE` - final leaderboard (all quizzes completed)
 
-## Autore
+## Author
 
 **Tommaso Pellegrini**  
-Università di Pisa  
-Corso: Reti Informatiche
+University of Pisa  
+Course: Computer Networks
 
-## Licenza
+## License
 
-Progetto accademico sviluppato per scopi didattici.
+Academic project developed for educational purposes.
