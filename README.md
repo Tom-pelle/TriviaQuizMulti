@@ -1,6 +1,6 @@
 # TriviaQuizMulti
 
-Multiplayer client-server quiz application developed in C for the Computer Networks course - University of Pisa.
+Multiplayer client-server quiz application developed in C for the Reti Informatiche course - University of Pisa.
 
 ## Description
 
@@ -115,7 +115,7 @@ TAGs used to identify messages:
 
 **Tommaso Pellegrini**  
 University of Pisa  
-Course: Computer Networks
+Course: Reti Informatiche - Ingegneria Informatica
 
 ## License
 
